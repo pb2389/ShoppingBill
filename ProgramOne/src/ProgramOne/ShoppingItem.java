@@ -9,15 +9,6 @@ public class ShoppingItem {
 	double itemTotal;
 	double roundedUpTax;
 
-	static final double EXEMPTED_RATE = 0.0;
-	static final double STANDARD_RATE = 10.0;
-	static final double IMPORTED_RATE = 5.0;
-
-	static final String IMPORTED = "imported";
-
-	static final String[] EXEMPTED_ITEMS = { "book", "chocolate", "pill" };
-	static boolean IS_EXEMPTED;
-
 	public ShoppingItem() {
 	}
 
