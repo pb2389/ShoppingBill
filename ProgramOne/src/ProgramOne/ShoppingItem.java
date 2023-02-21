@@ -7,29 +7,19 @@ public class ShoppingItem {
 	double price;
 	double taxRate;
 	double itemTotal;
+	double roundedUpTax;
 
 	static final double EXEMPTED_RATE = 0.0;
 	static final double STANDARD_RATE = 10.0;
 	static final double IMPORTED_RATE = 5.0;
 
-	double getSalesTaxRate(String itemName) {
+	static final String IMPORTED = "imported";
 
-		this.itemName = itemName;
-
-		if (itemName.contains("imported")
-				&& (itemName.contains("book") || itemName.contains("chocolate") || itemName.contains("pill"))) {
-			taxRate = IMPORTED_RATE;
-		} else if (itemName.contains("book") || itemName.contains("chocolate") || itemName.contains("pill")) {
-			taxRate = EXEMPTED_RATE;
-		} else if (itemName.contains("imported")) {
-			taxRate = IMPORTED_RATE + STANDARD_RATE;
-		} else
-			taxRate = STANDARD_RATE;
-		return taxRate;
-	}
+	static final String[] EXEMPTED_ITEMS = { "book", "chocolate", "pill" };
+	static boolean IS_EXEMPTED;
 
 	public ShoppingItem() {
-	} // constructor
+	}
 
 	public int getQuantity() {
 		return this.quantity;
@@ -51,16 +41,16 @@ public class ShoppingItem {
 		return this.itemTotal;
 	}
 
-	public double getRoundedUpTax() {
+	public void setName(String itemName) {
+		this.itemName = itemName;
+	}
 
-		// for getting rounded "up" tax value to nearest 0.05
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
-		Double roundedValue = Math.round((getTaxRate() / 100 * getPrice()) * 20) / 20.0;
-		Double unRoundedValue = ((getTaxRate() / 100 * getPrice()) * 20) / 20.0;
-		if (roundedValue < unRoundedValue) {
-			return roundedValue + 0.05;
-		} else
-			return roundedValue;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 }
