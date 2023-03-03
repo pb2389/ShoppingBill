@@ -1,16 +1,13 @@
 package ProgramOne;
 
-public class ShoppingItem {
+public class ShoppingItem implements TaxBrackets, RoundUpTaxes {
 
-	int quantity;
-	String itemName;
-	double price;
-	double taxRate;
-	double itemTotal;
-	double roundedUpTax;
-
-	public ShoppingItem() {
-	}
+	public String itemName;
+	public int quantity;
+	public double price;
+	public double taxRate;
+	public double itemTotal;
+	public double roundedUpTax;
 
 	public int getQuantity() {
 		return this.quantity;
@@ -32,6 +29,10 @@ public class ShoppingItem {
 		return this.itemTotal;
 	}
 
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	public void setName(String itemName) {
 		this.itemName = itemName;
 	}
@@ -40,8 +41,12 @@ public class ShoppingItem {
 		this.price = price;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setTaxRate() {
+		this.taxRate = TaxBrackets.setSalesTaxRate(this.itemName);
+		this.roundedUpTax = RoundUpTaxes.setRoundedUpTax(this);
 	}
 
+	public void setItemTotal() {
+		this.itemTotal = (this.getQuantity()) * (this.getPrice()) + this.roundedUpTax;
+	}
 }
